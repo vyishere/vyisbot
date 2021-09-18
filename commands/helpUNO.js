@@ -6,7 +6,7 @@ const Discord = require('discord.js') //looks like my old bot
 
         const helpEmbed = new Discord.MessageEmbed()
             .setTitle(`${client.user.username}'s UNO commands`)
-            .setDescription(`**Prefix:   v!(can't be changed for this one)    ** `)
+            .setDescription(`**Prefix:   v!   ** `)
             .addField(`\`creategame\``, `Create a new game of UNO`)
             .addField(`\`join\``, `Usage: **v!join**\n**Join a game of UNO available in a channel**`)
             .addField(`\`leave\``, `Usage: **v!leave**\n**Leave, duh!**`)
