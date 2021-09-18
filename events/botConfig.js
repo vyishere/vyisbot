@@ -1,5 +1,5 @@
 module.exports = {
-    token: "    ",  //token here
+    token: "bot_token",
     prefix: "v!",
     "emoji": {
         "play": "▶️",
