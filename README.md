@@ -1,15 +1,8 @@
-# vyisbot-lol
-vy bot lol 10 hours gone
-> You are viewing README file for vyisbot .codename(rewrite) 0.2.0
-
 # vyisbot
 
 Basically vyishere's bot.
 
-> This bot is still in development process, if something isn't working or weird stuff happens, try to download an older version or maybe fix the code yourself, then send me a feedback, I would really appreciate it.
-
 > About the volume command, it is not recommended to turn it all the way up to 300.
-
 
 ## Features
 
@@ -17,7 +10,7 @@ Basically vyishere's bot.
 * Has everything that a premium music bot have (all for free)
 * ~~Have some fun minigames~~
 * ~~RPS is a pure RNG game don't trust that~~
-* ~~Moderation commands~~
+* Moderation commands
 
 ## Credit
 
