@@ -6,7 +6,9 @@ exports.execute = (client, message, args) => {
             const embed = new Discord.MessageEmbed()
                 .setTitle(message.author.username)
                 .setColor(0x00ffff)
-                .setImage(message.author.displayAvatarURL({ format: 'png', size: 4096 }));
+                .setImage(message.author.displayAvatarURL({ format: 'png', size: 4096 }))
+                .setTimestamp()
+                .setFooter(message.author.username);
             return message.channel.send(embed);
         }
 
@@ -14,7 +16,9 @@ exports.execute = (client, message, args) => {
         const Embed = new Discord.MessageEmbed()
             .setTitle(message.mentions.users.first().username)
             .setColor(0x00ffff)
-            .setImage(mention.user.displayAvatarURL({ format: 'png', size: 4096 }));
+            .setImage(mention.user.displayAvatarURL({ format: 'png', size: 4096 }))
+            .setTimestamp()
+            .setFooter(message.author.username);
         return message.channel.send(Embed);
 
     },
@@ -22,6 +26,6 @@ exports.execute = (client, message, args) => {
 
 exports.help = {
     name: "avatar",
-    aliases: ["a", "ava", "pfp"],
+    aliases: ["av", "ava", "pfp"],
     usage: `avatar`
 }
