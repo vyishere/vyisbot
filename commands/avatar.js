@@ -1,35 +1,23 @@
-const { MessageEmbed } = require("discord.js");
-
+const Discord = require("discord.js")
 
 
 exports.execute = (client, message, args) => {
-  let user = message.author;
-       let avatar;
+        if (!message.mentions.users.size) {
+            const embed = new Discord.MessageEmbed()
+                .setTitle(message.author.username)
+                .setColor(0x00ffff)
+                .setImage(message.author.displayAvatarURL({ format: 'png', size: 4096 }));
+            return message.channel.send(embed);
+        }
 
-if (args.length > 0) {
-           let userID = args[0].slice(3, -1)
-           user = message.guild.members.cache.get(userID).user;
-       }
+        const mention = message.mentions.members.first();
+        const Embed = new Discord.MessageEmbed()
+            .setTitle(message.mentions.users.first().username)
+            .setColor(0x00ffff)
+            .setImage(mention.user.displayAvatarURL({ format: 'png', size: 4096 }));
+        return message.channel.send(Embed);
 
-       avatar = getUserAvatar(user);
-
-
-       let embed = new MessageEmbed()
-           .setTitle(`${user.tag}'s avatar'`)
-           .setURL(avatar)
-           .setImage(avatar)
-           .setColor('RANDOM')
-           .setDescription(`Avatar, its that simple`)
-       message.channel.send(embed)
-   }
-
-
-
-function getUserAvatar(user) {
-    let avatar = user.avatarURL()
-
-    return avatar;
-}
+    },
 
 
 exports.help = {
@@ -37,4 +25,3 @@ exports.help = {
     aliases: ["a", "ava", "pfp"],
     usage: `avatar`
 }
-
