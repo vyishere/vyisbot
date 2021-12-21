@@ -1,20 +1,25 @@
 const Discord = require("discord.js");
-      DisTube = require('distube'); //TOTALLY NOT COPIED FROM CATTO SHUT :SOB:
-const client = new Discord.Client({ disableMentions: 'everyone' });
+DisTube = require('distube');
+const client = new Discord.Client();
+const ms = require('ms')
 const Eco = require("quick.eco");
- //OH MY GOD IM SUCH AN IDIOT
-//FIX THE COOOOOOOOOOOOOOOOOOODE
-const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true });
+const snipes = new Discord.Collection()
+const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: false, leaveOnEmpty: true, leaveOnFinish: true, leaveOnStop: true});
 const { DiscordUNO } = require("discord-uno");
 const discordUNO = new DiscordUNO();
-//YOU FORGOR THE .catch() COMMAND
 client.eco = new Eco.Manager(); // quick.eco
 client.db = Eco.db; // quick.db
+const db = require('quick.db');
 client.config = require("./botConfig");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const fs = require("fs");
 const keep_alive = require('./keep_alive.js')
+var spam = false
+
+client.on('messageDelete', message => {
+  snipes.set(message.channel.id, message)
+})
 
 client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: false });
 
@@ -79,53 +84,82 @@ fs.readdir("./commands/", (err, files) => {
     });
 });
 
+// --- uno command --
 
-client.on("message", async message => {
-    if (message.content.toLowerCase() === "v!creategame") {
+client.on("message", async message => { 
+        //dont blame me im lazy to make like another 20000 commands with a handler lol
+        if (message.content.toLowerCase() === "v!creategame") {
         await discordUNO.createGame(message);
     }
-     if (message.content.toLowerCase() === "v!join")
+        if (message.content.toLowerCase() === "v!join")
         await discordUNO.addUser(message);
            
            
-     if (message.content.toLowerCase() === "v!leave")
+        if (message.content.toLowerCase() === "v!leave")
         await discordUNO.removeUser(message);
 
-      if (message.content.toLowerCase() === "v!startgame")
+        if (message.content.toLowerCase() === "v!startgame")
         await discordUNO.startGame(message);
 
-       if (message.content.toLowerCase() === "v!endgame")
+        if (message.content.toLowerCase() === "v!endgame")
         await discordUNO.endGame(message);
 
 
-      if (message.content.toLowerCase() === "v!closegame")
+        if (message.content.toLowerCase() === "v!closegame")
         await discordUNO.closeGame(message);  
 
-      if (message.content.toLowerCase().startsWith("v!unoplay"))
+        if (message.content.toLowerCase().startsWith("v!unoplay"))
         await discordUNO.playCard(message);
 
-      if (message.content.toLowerCase().startsWith("v!UNO"))
+        if (message.content.toLowerCase().startsWith("v!UNO"))
         await discordUNO.UNO(message);
 
+        
         if (message.content.toLowerCase() === "v!draw")
         await discordUNO.draw(message);
 
-      if (message.content.toLowerCase() === "v!cards")
+        if (message.content.toLowerCase() === "v!cards")
         await discordUNO.viewCards(message);
 
-       if (message.content.toLowerCase() === "v!table")
+        if (message.content.toLowerCase() === "v!table")
         await discordUNO.viewTable(message);
 
-      if (message.content.toLowerCase() === "v!viewwinners")
+        if (message.content.toLowerCase() === "v!viewwinners")
         await discordUNO.viewWinners(message);
+
+//miscellaneous
+      
+        if (message.content.toLowerCase() === "pingvylololol") {
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+          message.channel.send(`<@358904934282035211> <:ga:895234396649578526>`)
+        }
 
         if (message.content.toLowerCase() === "v!settings")
         await discordUNO.updateSetting(message);
+
+// -- snipe command --
+
+        if (message.content.toLowerCase() === "vy tell me what the hell did the other guy say")
+        {let sniped = snipes.get(message.channel.id)
+        if(!sniped) return message.channel.send('I have no idea lol')
+        
+        const snipeEmbed = new Discord.MessageEmbed()
+    .setColor("#FFFF00")
+    .setAuthor("sussy message", message.author.avatarURL)
+    .setDescription(sniped.content)
+    .setFooter(`Message by ${sniped.author.tag}`)
+    message.channel.send(snipeEmbed)
+    
+        
+        }
+
 
         if (message.content.toLowerCase() === "v!viewsettings") 
         await discordUNO.viewSettings(message);
 
 });
-//holy shit
-//how do we do uno help now
 client.login(client.config.token);
