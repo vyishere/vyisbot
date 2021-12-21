@@ -2,7 +2,7 @@ const Discord = require('discord.js');//holy shit //why not xd //WHY REDDIT //is
 const randomPuppy = require('random-puppy');
 exports.execute = async (client, message, args) => {
   const subreddits = ["meme", "me_irl", "dankmeme", "softwaregore", "cursedcomments",
-  "madlads"]
+  "madlads", "technicallythetruth"]
   const random = subreddits[Math.floor(Math.random() * subreddits.length)];
   const funnimeme = await randomPuppy(random);
 
@@ -17,6 +17,6 @@ exports.execute = async (client, message, args) => {
 
 exports.help = {
     name: "meme",
-    aliases: ["funni", "ifunny.co", "m"], //VY VY LOOK AT THIS THIS SHIT LOOL
+    aliases: ["funni", "ifunny.co"], //VY VY LOOK AT THIS THIS SHIT LOOL
     usage: `meme`
 }
