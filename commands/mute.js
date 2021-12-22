@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const ms = require("ms");
 
-exports.execute = async (client, message, args) => {
+exports.execute = async (client, message, args) => { 
+  const muterole = message.guild.roles.cache.find(r => r.name === 'Muted');
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**You don't have the permissions!**").then(msg => {
             msg.delete({ timeout: 5000 })
             })
@@ -16,10 +17,11 @@ exports.execute = async (client, message, args) => {
             if (!muteMember) return message.channel.send("**That user is not in this guild.**").then(msg => {
                     msg.delete({ timeout: 5000 })
             })
-            if (muteMember === message.member) return message.channel.send("**You cannot ban yourself!**").then(msg => {
+            if (muteMember === message.member) return message.channel.send("**You cannot mute yourself!**").then(msg => {
                     msg.delete({ timeout: 5000 })
             })
-    
+
+  //start of create role          
   if(message.member.hasPermission("MANAGE_MESSAGES")) 
  {
   if(!muterole){
@@ -41,9 +43,9 @@ exports.execute = async (client, message, args) => {
   })
  });
 }
+
  catch (e) {
- console.log(e.stack);
-}
+ console.log(e.stack);}
 
   let mutetime = args[1];
   if(!mutetime) return message.reply("You didn't specify a time!");
@@ -55,9 +57,9 @@ exports.execute = async (client, message, args) => {
     tomute.roles.remove(muterole.id);
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
-
+  }
 }}
-}
+ //end of module
 
 module.exports.help = {
   name: "mute",
