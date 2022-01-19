@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
 
 
-exports.execute = (client, message, args) => {
-        if (!message.mentions.users.size) {
+exports.execute = (client, message, args, guilds) => {
+        const mention = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        if (!mention) {
             const embed = new Discord.MessageEmbed()
                 .setTitle(message.author.username)
                 .setColor(0x00ffff)
@@ -11,14 +12,13 @@ exports.execute = (client, message, args) => {
                 .setFooter(message.author.username);
             return message.channel.send(embed);
         }
-
-        const mention = message.mentions.members.first();
+        
         const Embed = new Discord.MessageEmbed()
-            .setTitle(message.mentions.users.first().username)
+            .setTitle(`${mention.displayName}'s Avatar'`)
             .setColor(0x00ffff)
             .setImage(mention.user.displayAvatarURL({ format: 'png', size: 4096 }))
             .setTimestamp()
-            .setFooter(message.author.username);
+            .setFooter(message.member.displayName,  message.author.displayAvatarURL({ dynamic: true }));
         return message.channel.send(Embed);
 
     },
@@ -27,5 +27,5 @@ exports.execute = (client, message, args) => {
 exports.help = {
     name: "avatar",
     aliases: ["av", "ava", "pfp"],
-    usage: `avatar`
+    usage: `avatar [@user]`
 }
