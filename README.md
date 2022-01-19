@@ -19,3 +19,4 @@ To the internet, and baquyen, who helped me fix my weird codes and rewrite the e
 ![alt text](https://cdn.discordapp.com/attachments/887140495963357257/888444242840662056/unknown.png)
 super cracked dev team lol  
 yanderedev team if else command uno game top text bottom text
+do not attempt to open index.js and see what's inside
